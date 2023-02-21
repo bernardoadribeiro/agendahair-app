@@ -20,6 +20,9 @@ This course is offered by IFNMG Campus Januária.
 
 The app is containerized with Docker, and the features are developed using React and Flask to provide the APIs
 
+- Docker
+- Docker-compose
+
 **Front-end**
 - React.js
 
