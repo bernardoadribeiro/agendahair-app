@@ -43,7 +43,7 @@ The app is containerized with Docker, and the features are developed using React
 **How to run**
 - Clone this repository: `git clone https://github.com/bernardoadribeiro/agendahair-app.git`
 - Go to project folder: `cd agendahair-app`
-- Create the `env`file: `cp .env.sample .env` (do it for the .env.sample in root and backup folders)
+- Create the `.env` file: `cp .env.sample .env` (do it for the `.env.sample` in root and backend folders)
 - (open Docker Desktop before continue if you are using WSL)
 - Run: `docker-compose up` and wait.
 - You will see a success message in the terminal
