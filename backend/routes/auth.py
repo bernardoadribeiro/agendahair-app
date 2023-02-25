@@ -1,4 +1,6 @@
 from flask import Blueprint, jsonify, request
+from flask_login import login_user, login_required, logout_user
+
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app import db
@@ -10,12 +12,42 @@ auth_bp = Blueprint('auth', __name__)
 @auth_bp.route('/login', methods=['POST'])
 def login():
     """ API de Login
+        
+        body: espera receber um form-data
+        form-data:
+            - email: string (obrigatorio)
+            - senha: string (obrigatorio)
     """
 
-    return jsonify(), 200
+    email = request.form.get('email')
+    senha = request.form.get('senha')
+
+    if not email or not senha:
+        return jsonify({'sucesso':False, 'mensagem':'Email e senha precisam ser informados.'})
+    
+    usuario = Usuario.query.filter_by(email=email).first()
+    
+    if usuario:
+        if check_password_hash(usuario.senha, senha):
+            login_user(usuario, remember=True) # Loga o usuario no App Flask
+            return jsonify({'sucesso': True, 'mensagem':'Usuario autenticado!'}), 200
+        else: 
+            return jsonify({'sucesso': False, 'mensagem':'Senha incorreta.'}), 400
+    else: 
+        return jsonify({'sucesso': False, 'mensagem':'Usuario nao encontrado.'}), 404
+
+
+@auth_bp.route('/logout', methods=['POST'])
+def logout():
+    """ API de Logout
+    """
+    
+    logout_user()
+    return jsonify({'sucesso': True, 'mensagem':'Voce foi deslogado.'}), 200
 
 
 @auth_bp.route('/cadastrar_usuario/', methods=['POST'])
+@login_required
 def post_usuario():    
     """ Cadastra novo usuario 
 
@@ -24,8 +56,7 @@ def post_usuario():
             - nome: string
             - sobrenome: string
             - email: string (obrigatorio)
-            - senha: string (obrigatorio)
-            
+            - senha: string (obrigatorio)   
     """
     
     nome = request.form.get('nome')

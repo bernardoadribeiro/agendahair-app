@@ -1,8 +1,9 @@
 from sqlalchemy_serializer import SerializerMixin
+from flask_login import UserMixin
 
 from app import db
 
-class Usuario(db.Model, SerializerMixin):
+class Usuario(db.Model, SerializerMixin, UserMixin):
     """ Tabela de usuarios do sistema
     """
 
