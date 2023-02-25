@@ -48,6 +48,15 @@ The app is containerized with Docker, and the features are developed using React
 - Run: `docker-compose up` and wait.
 - You will see a success message in the terminal
 
+**Migrations**
+> - Run the following lines when needs to manage migrations:
+> - Usage: `flask db [OPTIONS] COMMAND [ARGS]...`
+
+- `flask db init`: to create a folder with set to migration.
+- `flask db migrate -m "Initial migration."`: to generate a migration.
+- `flask db [upgrade|downgrade]`: to up/down changes based on migration files.
+- `flask db --help`: Show database help message.
+
 **How to access the app**
 - Front-end URL: http://localhost:3000
 - Back-end URL: http://localhost:5000
