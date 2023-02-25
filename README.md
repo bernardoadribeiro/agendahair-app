@@ -51,6 +51,7 @@ The app is containerized with Docker, and the features are developed using React
 **Migrations**
 > - Run the following lines when needs to manage migrations:
 > - Usage: `flask db [OPTIONS] COMMAND [ARGS]...`
+
 - `flask db init`: to create a folder with set to migration.
 - `flask db migrate -m "Initial migration."`: to generate a migration.
 - `flask db [upgrade|downgrade]`: to up/down changes based on migration files.
