@@ -34,7 +34,7 @@ def get_usuario(id):
     usuario = Usuario.query.filter_by(id=id).first()
 
     if usuario is None:
-        return jsonify({"error":'Usuario nao encontrado.'}), 204
+        return jsonify({"error":'Usuario nao encontrado.'}), 404
 
     return jsonify(        
         {
