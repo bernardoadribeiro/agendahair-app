@@ -15,6 +15,11 @@ app.secret_key = config('SECRET_KEY')
 db = init_database(app)
 migrate = Migrate(app, db, directory='./migrations')
 
+# Importa models
+from models.usuario import Usuario
+from models.agendamento import Agendamento
+
+
 ## Registra as rotas do app
 app.register_blueprint(index.index_bp, url_prefix='/')
 
