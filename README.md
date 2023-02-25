@@ -64,3 +64,5 @@ The app is containerized with Docker, and the features are developed using React
 **Useful commands**
 - `docker-compose up`: Run all containers
 - `docker-compose down`: Stop all containers
+- `docker-compose build [backend | frontend | database]`: Re-build a specific container
+- Install React dependencies: `cd frontend && npm install`
