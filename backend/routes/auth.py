@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -93,4 +93,17 @@ def post_usuario():
     return jsonify({
             "sucesso": True,
             "mensagem": f"Usuario {novo_usuario.email} criado com sucesso"
+    }), 200
+
+@auth_bp.route('/usuarios/me', methods=['GET'])
+@login_required
+def usuarios_me():
+    """ Retorna as informacoes do usuarios que esta logado.
+    """
+    
+    return jsonify({
+            'id': current_user.id,
+            'nome': current_user.nome,
+            'sobrenome': current_user.sobrenome,
+            'email': current_user.email,
     }), 200
