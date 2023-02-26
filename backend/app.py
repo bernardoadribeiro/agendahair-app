@@ -2,12 +2,14 @@ from flask import Flask
 from flask_migrate import Migrate
 from flask_login import LoginManager
 
+from datetime import timedelta
 from decouple import config
 
 from database import init_database
 
 app = Flask(__name__)
 app.secret_key = config('SECRET_KEY')
+app.config['TIMEZONE'] = timedelta(hours=-3)
 
 
 # Inicializa o Banco de Dados
@@ -20,11 +22,12 @@ from models.agendamento import Agendamento
 
 
 ## Registra as rotas do app
-from routes import index, usuario, auth
+from routes import index, usuario, auth, agendamento
 
 app.register_blueprint(index.index_bp, url_prefix='/')
 app.register_blueprint(usuario.usuario_bp, url_prefix='/')
 app.register_blueprint(auth.auth_bp, url_prefix='/')
+app.register_blueprint(agendamento.agendamento_bp, url_prefix='/')
 
 
 # Login manager
