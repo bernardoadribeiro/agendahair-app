@@ -65,9 +65,12 @@ def post_agendamento():
         horario_inicio=body['horario_inicio'],
         horario_fim=body['horario_fim'],
         status='Nao_Confirmado',
-        servicos_desejados=body['servicos_desejados'],
-        observacoes=body['observacoes'],
     )
+    # servicos_desejados e observacoes sao campos opcionais
+    if 'servicos_desejados' in body:
+        novo_agendamento.servicos_desejados = body['servicos_desejados']
+    if 'observacoes' in body:
+        novo_agendamento.observacoes = body['observacoes']
 
     db.session.add(novo_agendamento)
     db.session.commit()
