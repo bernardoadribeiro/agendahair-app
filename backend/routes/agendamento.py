@@ -41,6 +41,27 @@ def get_agendamentos():
     )
 
 
+@agendamento_bp.route('/agendamentos/<codigo>', methods=['GET'])
+@swag_from('../docs/agendamentos_get_code.yml')
+def get_agendamentos_code(codigo):
+    """ Retorna um agendamento filtrando pelo código informado na URL
+        body: <vazio>
+        Filtros:
+            - codigo_agendamento: string -> Codigo do agendamento
+    """
+
+    try:
+        agendamento = Agendamento.query.filter_by(code=codigo).first()
+        return jsonify([ agendamento.to_dict() ])
+
+    except Exception as e:
+        print('Erro: ', e)
+        return jsonify({
+            'sucesso': False, 
+            'mensagem': 'Agendamento não encontrado.',
+        }), 404
+
+
 @agendamento_bp.route('/agendamentos', methods=['POST'])
 @login_required
 @swag_from('../docs/agendamentos_post.yml')
