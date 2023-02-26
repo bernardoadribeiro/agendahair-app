@@ -1,10 +1,10 @@
 tags: 
   - Agendamentos
-summary: Retorna o agendamento do código informado.
-description: Este endpoint retorna o agendamentos filtrando pelo código de agendamento. Não requer autenticação.
+summary: Retorna o agendamento do código informado na URL.
+description: Este endpoint retorna o agendamentos filtrando pelo código de agendamento informado na URL. Não requer autenticação.
 parameters:
   - name: codigo_agendamento
-    in: query
+    in: path
     description: Código do agendamento
     required: true
     type: string
@@ -14,30 +14,37 @@ responses:
     schema:
       type: object
       properties:
-        agendamentos:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: integer
-              code:
-                type: integer
-              nome_cliente:
-                type: string
-              data_agendamento:
-                type: string
-              horario_inicio:
-                type: string
-              horario_fim:
-                type: string
-              servicos_desejados:
-                type: string
-              observacoes:
-                type: string
-              status:
-                type: string
-              criado_em:
-                type: string
-              atualizado_em:
-                type: string
+        id:
+          type: integer
+        code:
+          type: integer
+        nome_cliente:
+          type: string
+        data_agendamento:
+          type: string
+        horario_inicio:
+          type: string
+        horario_fim:
+          type: string
+        servicos_desejados:
+          type: string
+        observacoes:
+          type: string
+        status:
+          type: string
+        criado_em:
+          type: string
+        atualizado_em:
+          type: string
+  '404':
+    description: Agendamento não encontrado.
+    schema:
+      type: object
+      properties:
+        sucesso:
+          type: boolean
+          example: false
+          description: Indica se a operação foi bem sucedida
+        mensagem:
+          type: string
+          description: Mensagem informativa

@@ -35,7 +35,7 @@ parameters:
     type: string
 responses:
   200:
-    description: OK
+    description: Agendamento inserido com sucesso
     schema:
       type: object
       properties:
@@ -45,3 +45,14 @@ responses:
           type: string
         novo_agendamento:
           type: object
+  400:
+    description: Falha ao inserir o agendamento.
+    schema:
+      type: object
+      properties:
+        sucesso:
+          type: boolean
+          example: false
+        mensagem:
+          type: string
+          example: Falha ao inserir o agendamento.

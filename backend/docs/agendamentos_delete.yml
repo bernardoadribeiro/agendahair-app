@@ -8,7 +8,6 @@ parameters:
     description: ID do agendamento a ser deletado
     required: true
     type: integer
-    format: int64
 responses:
   '200':
     description: Agendamento deletado com sucesso

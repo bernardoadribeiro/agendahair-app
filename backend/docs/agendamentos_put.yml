@@ -64,6 +64,7 @@ responses:
       properties:
         sucesso:
           type: boolean
+          example: false
           description: Indica se a operação foi bem sucedida
         mensagem:
           type: string
