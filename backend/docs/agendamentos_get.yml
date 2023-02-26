@@ -8,6 +8,11 @@ parameters:
     description: Data do agendamento (opcional)
     required: false
     type: string
+  - name: codigo_agendamento
+    in: query
+    description: Código do agendamento (opcional)
+    required: false
+    type: integer
 responses:
   '200':
     description: Lista de agendamentos
