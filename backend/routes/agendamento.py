@@ -53,8 +53,10 @@ def post_agendamento():
     if not data:
         return jsonify({'sucesso': False, 'mensagem':'Nenhum dado foi informado. Informe os dados corretamente.'}), 400
 
+    codigo_gerado = gera_codigo()
+
     novo_agendamento = Agendamento(
-        code=data['code'],
+        code=codigo_gerado,
         nome_cliente=data['nome_cliente'],
         data_agendamento=data['data_agendamento'],
         horario_inicio=data['horario_inicio'],
@@ -73,3 +75,38 @@ def post_agendamento():
         'novo_agendamento': [novo_agendamento.to_dict()]
     })
 
+
+def gera_codigo():
+    """ Gerador automatico de codigo unico para cada agendamento.
+        Retorno: Codigo no formato `ABCD12`
+    """
+
+    q_letra, q_num = 4, 2
+
+    codigo = ''
+    letras = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W','X', 'Y', 'Z']
+    numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+
+    for i in range(q_letra):
+        c = random.choice(letras)
+        codigo = concat(codigo, c)
+    for i in range(q_num):
+        n = random.choice(numeros)
+        codigo = concat(codigo, str(n))
+
+    if verifica_codigo(codigo) is True:
+        gera_codigo()
+    else:
+        return codigo
+
+
+def verifica_codigo(codigo):
+    """ Verifica se ja existe outro registro com o codigo informado.
+    """
+
+    agendamento = Agendamento.query.filter_by(code=codigo).first()
+
+    if agendamento:
+        return True
+    else: 
+        return False
