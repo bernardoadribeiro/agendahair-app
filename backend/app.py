@@ -1,9 +1,8 @@
 from flask import Flask
 from flask_migrate import Migrate
+from flask_login import LoginManager
 
 from decouple import config
-
-from routes import index
 
 from database import init_database
 
@@ -21,7 +20,20 @@ from models.agendamento import Agendamento
 
 
 ## Registra as rotas do app
+from routes import index, usuario, auth
+
 app.register_blueprint(index.index_bp, url_prefix='/')
+app.register_blueprint(usuario.usuario_bp, url_prefix='/')
+app.register_blueprint(auth.auth_bp, url_prefix='/')
+
+
+# Login manager
+login_manager = LoginManager(app)
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(id):
+    return Usuario.query.get(int(id))
 
 
 ## Iniciliza o App
