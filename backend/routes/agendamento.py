@@ -1,7 +1,9 @@
-from operator import concat
-import random
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
+from sqlalchemy.sql import func
+
+from operator import concat
+import random
 
 from app import db
 from models.agendamento import Agendamento
@@ -50,21 +52,21 @@ def post_agendamento():
             - observacoes: string
     """
 
-    data = request.form.to_dict()
-    if not data:
+    body = request.form.to_dict()
+    if not body:
         return jsonify({'sucesso': False, 'mensagem':'Nenhum dado foi informado. Informe os dados corretamente.'}), 400
 
     codigo_gerado = gera_codigo()
 
     novo_agendamento = Agendamento(
         code=codigo_gerado,
-        nome_cliente=data['nome_cliente'],
-        data_agendamento=data['data_agendamento'],
-        horario_inicio=data['horario_inicio'],
-        horario_fim=data['horario_fim'],
+        nome_cliente=body['nome_cliente'],
+        data_agendamento=body['data_agendamento'],
+        horario_inicio=body['horario_inicio'],
+        horario_fim=body['horario_fim'],
         status='Nao_Confirmado',
-        servicos_desejados=data['servicos_desejados'],
-        observacoes=data['observacoes'],
+        servicos_desejados=body['servicos_desejados'],
+        observacoes=body['observacoes'],
     )
 
     db.session.add(novo_agendamento)
@@ -74,6 +76,55 @@ def post_agendamento():
         'sucesso': True, 
         'mensagem': 'Agendamento inserido com sucesso',
         'novo_agendamento': [novo_agendamento.to_dict()]
+    })
+
+
+@agendamento_bp.route('/agendamentos/<id>', methods=['PUT'])
+@login_required
+def put_agendamento(id):
+    """ Atualiza o agendamento do ID informado na URL com os dados informados no form-data
+        body: espera receber um form-data
+        form-data:
+            - nome_cliente: string (obrigatorio)
+            - data_agendamento: Date `yyyy-mm-dd` (obrigatorio)
+            - horario_inicio: Time (obrigatorio)
+            - horario_fim: Time (obrigatorio)
+            - status: string : `[Nao_Confirmado, Confirmado]` (obrigatorio)
+            - servicos_desejados:  string
+            - observacoes: string
+    """
+
+    body = request.form.to_dict()
+    if not body:
+        return jsonify({'sucesso': False, 'mensagem':'Nenhum dado foi informado. Informe os dados corretamente.'}), 400
+
+    agendamento = Agendamento.query.filter_by(id=id).first()
+    if not agendamento:
+        return jsonify({'sucesso': False, 'mensagem':'Agendamento nao encontrado.'}), 400
+
+    # Atualiza os dados do objeto informado
+    agendamento.atualizado_em = func.now()
+    if 'nome_cliente' in body:
+        agendamento.nome_cliente = body['nome_cliente'],
+    if 'data_agendamento' in body:
+        agendamento.data_agendamento = body['data_agendamento']
+    if 'horario_inicio' in body:
+        agendamento.horario_inicio = body['horario_inicio']
+    if 'horario_fim' in body:
+        agendamento.horario_fim = body['horario_fim']
+    if 'status' in body:
+        agendamento.status = body['status']
+    if 'servicos_desejados' in body:
+        agendamento.servicos_desejados = body['servicos_desejados']
+    if 'observacoes' in body:
+        agendamento.observacoes = body['observacoes']
+    
+    db.session.commit()
+    
+    return jsonify({
+        'sucesso': True, 
+        'mensagem': 'Agendamento atualizado com sucesso.',
+        'agendamento_atualizado': [agendamento.to_dict()]
     })
 
 
