@@ -56,9 +56,7 @@ responses:
           type: string
           description: Mensagem de retorno da operação
         agendamento_atualizado:
-          type: array
-          items:
-            $ref: '#/definitions/Agendamento'
+          type: object
   '400':
     description: Parâmetros inválidos ou agendamento não encontrado
     schema:

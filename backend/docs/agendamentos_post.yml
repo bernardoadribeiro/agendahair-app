@@ -44,4 +44,4 @@ responses:
         mensagem:
           type: string
         novo_agendamento:
-          $ref: '#/definitions/Agendamento'
+          type: object
