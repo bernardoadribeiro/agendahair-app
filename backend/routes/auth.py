@@ -3,6 +3,8 @@ from flask_login import login_user, login_required, logout_user, current_user
 
 from werkzeug.security import check_password_hash, generate_password_hash
 
+from flasgger import swag_from
+
 from app import db
 from models.usuario import Usuario
 
@@ -10,6 +12,7 @@ from models.usuario import Usuario
 auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/login', methods=['POST'])
+@swag_from('../docs/login.yml')
 def login():
     """ API de Login
         
@@ -38,6 +41,7 @@ def login():
 
 
 @auth_bp.route('/logout', methods=['POST'])
+@swag_from('../docs/logout.yml')
 def logout():
     """ API de Logout
     """
@@ -48,6 +52,7 @@ def logout():
 
 @auth_bp.route('/cadastrar_usuario/', methods=['POST'])
 @login_required
+@swag_from('../docs/cadastrar_usuario.yml')
 def post_usuario():    
     """ Cadastra novo usuario 
 
@@ -106,6 +111,7 @@ def post_usuario():
 
 @auth_bp.route('/usuarios/me', methods=['GET'])
 @login_required
+@swag_from('../docs/usuarios_me.yml')
 def usuarios_me():
     """ Retorna as informacoes do usuarios que esta logado.
     """

@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flasgger import Swagger
 
 from datetime import timedelta
 from decouple import config
@@ -10,6 +11,16 @@ from database import init_database
 app = Flask(__name__)
 app.secret_key = config('SECRET_KEY')
 app.config['TIMEZONE'] = timedelta(hours=-3)
+
+
+# Config Swagger Doc
+app.config['SWAGGER'] = {
+    'title': 'AgendaHair API Documentation',
+    'uiversion': 3,
+    'version': '0.1.0',
+    'description': 'Documentação das APIs do App AgendaHair',
+}
+swagger = Swagger(app)
 
 
 # Inicializa o Banco de Dados

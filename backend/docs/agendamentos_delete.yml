@@ -1,0 +1,33 @@
+tags:
+- Agendamentos
+summary: Deleta um agendamento existente
+description: Este endpoint deleta um agendamento existente na base de dados. Requer autenticação.
+parameters:
+  - name: id
+    in: path
+    description: ID do agendamento a ser deletado
+    required: true
+    type: integer
+responses:
+  '200':
+    description: Agendamento deletado com sucesso
+    schema:
+      type: object
+      properties:
+        sucesso:
+          type: boolean
+          description: Indica se a operação foi bem sucedida
+        mensagem:
+          type: string
+          description: Mensagem indicando o resultado da operação
+  '400':
+    description: Falha ao deletar o agendamento
+    schema:
+      type: object
+      properties:
+        sucesso:
+          type: boolean
+          description: Indica se a operação foi bem sucedida
+        mensagem:
+          type: string
+          description: Mensagem indicando o resultado da operação

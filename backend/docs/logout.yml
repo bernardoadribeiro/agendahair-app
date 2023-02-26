@@ -1,0 +1,7 @@
+tags:
+  - Autenticação
+summary: API de Logout
+description: Endpoint para realizar o logout do usuário. Ao enviar uma requisição para endpoint, o usuário será deslogado.
+responses:
+  200:
+    description: Logout realizado com sucesso.

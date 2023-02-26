@@ -1,0 +1,51 @@
+
+tags:
+  - Autenticação
+summary: API de Cadastro de Usuário
+description: Cadastra um novo usuário no sistema
+parameters:
+  - name: nome
+    in: formData
+    description: Nome do usuário
+    required: false
+    type: string
+  - name: sobrenome
+    in: formData
+    description: Sobrenome do usuário
+    required: false
+    type: string
+  - name: email
+    in: formData
+    description: E-mail do usuário (obrigatório)
+    required: true
+    type: string
+  - name: senha
+    in: formData
+    description: Senha do usuário (obrigatório)
+    required: true
+    type: string
+responses:
+  '200':
+    description: Usuário cadastrado com sucesso
+    schema:
+      type: object
+      properties:
+        sucesso:
+          type: boolean
+          description: Indica se a operação foi bem sucedida
+        mensagem:
+          type: string
+          description: Mensagem informativa
+  '400':
+    description: Erro de validação. Falha ao inserir o usuario.
+    schema:
+      type: object
+      properties:
+        sucesso:
+          type: boolean
+          description: Indica se a operação foi bem sucedida
+        mensagem:
+          type: string
+          description: Mensagem informativa
+  '401':
+    description: Não autorizado

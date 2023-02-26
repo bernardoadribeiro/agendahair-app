@@ -1,0 +1,48 @@
+tags: 
+  - Agendamentos
+summary: Retorna a lista de agendamentos
+description: Este endpoint retorna a lista de todos os agendamentos cadastrados ou filtrados por data ou código de agendamento. Requer autenticação.
+parameters:
+  - name: data_agendamento
+    in: query
+    description: Data do agendamento (opcional)
+    required: false
+    type: string
+  - name: codigo_agendamento
+    in: query
+    description: Código do agendamento (opcional)
+    required: false
+    type: integer
+responses:
+  '200':
+    description: Lista de agendamentos
+    schema:
+      type: object
+      properties:
+        agendamentos:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              code:
+                type: integer
+              nome_cliente:
+                type: string
+              data_agendamento:
+                type: string
+              horario_inicio:
+                type: string
+              horario_fim:
+                type: string
+              servicos_desejados:
+                type: string
+              observacoes:
+                type: string
+              status:
+                type: string
+              criado_em:
+                type: string
+              atualizado_em:
+                type: string
