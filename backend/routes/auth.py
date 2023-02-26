@@ -78,22 +78,31 @@ def post_usuario():
             'mensagem': f'Usuario com o email `{email}` ja esta cadastrado.'
         }), 400
 
-    # Cria objeto novo_usuario
-    novo_usuario = Usuario(
-        nome=nome, 
-        sobrenome=sobrenome, 
-        email=email, 
-        senha=generate_password_hash(senha, method='sha256')
-    )
     
-    # Salva o novo usuario
-    db.session.add(novo_usuario)
-    db.session.commit()
+    try:
+        # Cria objeto novo_usuario
+        novo_usuario = Usuario(
+            nome=nome, 
+            sobrenome=sobrenome, 
+            email=email, 
+            senha=generate_password_hash(senha, method='sha256')
+        )
+        
+        # Salva o novo usuario
+        db.session.add(novo_usuario)
+        db.session.commit()
 
-    return jsonify({
-            "sucesso": True,
-            "mensagem": f"Usuario {novo_usuario.email} criado com sucesso"
-    }), 200
+        return jsonify({
+                "sucesso": True,
+                "mensagem": f"Usuario {novo_usuario.email} criado com sucesso"
+        }), 200
+    
+    except Exception as e:
+        print('Erro:', e)
+        return jsonify({
+                "sucesso": False,
+                "mensagem": f"Falha ao inserir o usuario {novo_usuario.email}."
+        }), 400
 
 @auth_bp.route('/usuarios/me', methods=['GET'])
 @login_required

@@ -8,6 +8,7 @@ import random
 from app import db
 from models.agendamento import Agendamento
 
+
 agendamento_bp = Blueprint('agendamento', __name__)
 
 @agendamento_bp.route('/agendamentos', methods=['GET'])
@@ -22,7 +23,6 @@ def get_agendamentos():
 
     data_agendamento = request.form.get('data_agendamento')
     codigo_agendamento = request.form.get('codigo_agendamento')
-
 
     if data_agendamento:
         agendamentos = Agendamento.query.filter_by(data_agendamento=data_agendamento)
@@ -56,30 +56,39 @@ def post_agendamento():
     if not body:
         return jsonify({'sucesso': False, 'mensagem':'Nenhum dado foi informado. Informe os dados corretamente.'}), 400
 
-    codigo_gerado = gera_codigo()
+    try:
+        codigo_gerado = gera_codigo()
 
-    novo_agendamento = Agendamento(
-        code=codigo_gerado,
-        nome_cliente=body['nome_cliente'],
-        data_agendamento=body['data_agendamento'],
-        horario_inicio=body['horario_inicio'],
-        horario_fim=body['horario_fim'],
-        status='Nao_Confirmado',
-    )
-    # servicos_desejados e observacoes sao campos opcionais
-    if 'servicos_desejados' in body:
-        novo_agendamento.servicos_desejados = body['servicos_desejados']
-    if 'observacoes' in body:
-        novo_agendamento.observacoes = body['observacoes']
+        novo_agendamento = Agendamento(
+            code=codigo_gerado,
+            nome_cliente=body['nome_cliente'],
+            data_agendamento=body['data_agendamento'],
+            horario_inicio=body['horario_inicio'],
+            horario_fim=body['horario_fim'],
+            status='Nao_Confirmado',
+        )
+        # servicos_desejados e observacoes sao campos opcionais
+        if 'servicos_desejados' in body:
+            novo_agendamento.servicos_desejados = body['servicos_desejados']
+        if 'observacoes' in body:
+            novo_agendamento.observacoes = body['observacoes']
 
-    db.session.add(novo_agendamento)
-    db.session.commit()
+        db.session.add(novo_agendamento)
+        db.session.commit()
 
-    return jsonify({
-        'sucesso': True, 
-        'mensagem': 'Agendamento inserido com sucesso',
-        'novo_agendamento': [novo_agendamento.to_dict()]
-    })
+        return jsonify({
+            'sucesso': True, 
+            'mensagem': 'Agendamento inserido com sucesso',
+            'novo_agendamento': [novo_agendamento.to_dict()]
+        })
+    
+    except Exception as e:
+        print('Erro: ', e)
+        return jsonify({
+            'sucesso': False, 
+            'mensagem': 'Falha ao inserir o agendamento.',
+        }), 400
+
 
 
 @agendamento_bp.route('/agendamentos/<id>', methods=['PUT'])
@@ -105,30 +114,38 @@ def put_agendamento(id):
     if not agendamento:
         return jsonify({'sucesso': False, 'mensagem':'Agendamento nao encontrado.'}), 400
 
-    # Atualiza os dados do objeto informado
-    agendamento.atualizado_em = func.now()
-    if 'nome_cliente' in body:
-        agendamento.nome_cliente = body['nome_cliente'],
-    if 'data_agendamento' in body:
-        agendamento.data_agendamento = body['data_agendamento']
-    if 'horario_inicio' in body:
-        agendamento.horario_inicio = body['horario_inicio']
-    if 'horario_fim' in body:
-        agendamento.horario_fim = body['horario_fim']
-    if 'status' in body:
-        agendamento.status = body['status']
-    if 'servicos_desejados' in body:
-        agendamento.servicos_desejados = body['servicos_desejados']
-    if 'observacoes' in body:
-        agendamento.observacoes = body['observacoes']
+    try:
+        # Atualiza os dados do objeto informado
+        agendamento.atualizado_em = func.now()
+        if 'nome_cliente' in body:
+            agendamento.nome_cliente = body['nome_cliente'],
+        if 'data_agendamento' in body:
+            agendamento.data_agendamento = body['data_agendamento']
+        if 'horario_inicio' in body:
+            agendamento.horario_inicio = body['horario_inicio']
+        if 'horario_fim' in body:
+            agendamento.horario_fim = body['horario_fim']
+        if 'status' in body:
+            agendamento.status = body['status']
+        if 'servicos_desejados' in body:
+            agendamento.servicos_desejados = body['servicos_desejados']
+        if 'observacoes' in body:
+            agendamento.observacoes = body['observacoes']
+        
+        db.session.commit()
+        
+        return jsonify({
+            'sucesso': True, 
+            'mensagem': 'Agendamento atualizado com sucesso.',
+            'agendamento_atualizado': [agendamento.to_dict()]
+        })
     
-    db.session.commit()
-    
-    return jsonify({
-        'sucesso': True, 
-        'mensagem': 'Agendamento atualizado com sucesso.',
-        'agendamento_atualizado': [agendamento.to_dict()]
-    })
+    except Exception as e:
+        print('Erro: ', e)
+        return jsonify({
+            'sucesso': False, 
+            'mensagem': 'Falha ao atualizar o agendamento.',
+        }), 400
 
 
 @agendamento_bp.route('/agendamentos/<id>', methods=['DELETE'])
@@ -142,13 +159,21 @@ def delete_agendamento(id):
     if not agendamento:
         return jsonify({'sucesso': False, 'mensagem':'Agendamento nao encontrado.'}), 400
     
-    db.session.delete(agendamento)
-    db.session.commit()
+    try:
+        db.session.delete(agendamento)
+        db.session.commit()
 
-    return jsonify({
-        'sucesso': True, 
-        'mensagem': 'Agendamento deletado com sucesso.',
-    })
+        return jsonify({
+            'sucesso': True, 
+            'mensagem': 'Agendamento deletado com sucesso.',
+        })
+    
+    except Exception as e:
+        print('Erro: ', e)
+        return jsonify({
+            'sucesso': False, 
+            'mensagem': 'Falha ao deletar o agendamento.',
+        }), 400
     
 
 def gera_codigo():
