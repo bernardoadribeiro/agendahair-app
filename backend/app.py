@@ -2,12 +2,14 @@ from flask import Flask
 from flask_migrate import Migrate
 from flask_login import LoginManager
 
+from datetime import timedelta
 from decouple import config
 
 from database import init_database
 
 app = Flask(__name__)
 app.secret_key = config('SECRET_KEY')
+app.config['TIMEZONE'] = timedelta(hours=-3)
 
 
 # Inicializa o Banco de Dados
