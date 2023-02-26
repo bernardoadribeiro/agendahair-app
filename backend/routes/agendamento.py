@@ -1,6 +1,7 @@
 from operator import concat
 import random
 from flask import Blueprint, jsonify, request
+from flask_login import login_required
 
 from app import db
 from models.agendamento import Agendamento
@@ -8,6 +9,7 @@ from models.agendamento import Agendamento
 agendamento_bp = Blueprint('agendamento', __name__)
 
 @agendamento_bp.route('/agendamentos', methods=['GET'])
+@login_required
 def get_agendamentos():
     """ Retorna todos os agendamentos realizados com filtros
         body: espera receber um form-data
@@ -34,17 +36,16 @@ def get_agendamentos():
     )
 
 
-@agendamento_bp.route('/agendamentos', methods=['POST', 'PUT'])
+@agendamento_bp.route('/agendamentos', methods=['POST'])
+@login_required
 def post_agendamento():
     """ Insere um novo agendamento com os dados informados no form-data
         body: espera receber um form-data
         form-data:
-            - codigo: string
-            - nome_cliente: string
-            - data_agendamento: Date `yyyy-mm-dd`
-            - horario_inicio: Time
-            - horario_fim: Time
-            - status: string (Confirmado, Nao_Confirmado)
+            - nome_cliente: string (obrigatorio)
+            - data_agendamento: Date `yyyy-mm-dd` (obrigatorio)
+            - horario_inicio: Time (obrigatorio)
+            - horario_fim: Time (obrigatorio)
             - servicos_desejados:  string
             - observacoes: string
     """
