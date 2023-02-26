@@ -23,7 +23,7 @@ def login():
     senha = request.form.get('senha')
 
     if not email or not senha:
-        return jsonify({'sucesso':False, 'mensagem':'Email e senha precisam ser informados.'})
+        return jsonify({'sucesso':False, 'mensagem':'Email e senha precisam ser informados.'}), 400
     
     usuario = Usuario.query.filter_by(email=email).first()
     
@@ -69,7 +69,7 @@ def post_usuario():
         return jsonify({
             "sucesso": False, 
             "mensagem": "Email e Senha precisam ser informados."
-        })
+        }), 400
     
     # Retorna erro se ja existir um usuario com o email informado.
     if Usuario.query.filter_by(email=email).first():
@@ -100,10 +100,5 @@ def post_usuario():
 def usuarios_me():
     """ Retorna as informacoes do usuarios que esta logado.
     """
-    
-    return jsonify({
-            'id': current_user.id,
-            'nome': current_user.nome,
-            'sobrenome': current_user.sobrenome,
-            'email': current_user.email,
-    }), 200
+
+    return current_user.gera_json(), 200

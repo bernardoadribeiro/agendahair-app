@@ -39,11 +39,4 @@ def get_usuario(id):
     if usuario is None:
         return jsonify({"error":'Usuario nao encontrado.'}), 404
 
-    return jsonify(        
-        {
-            'id': usuario.id,
-            'nome': usuario.nome,
-            'sobrenome': usuario.sobrenome,
-            'email': usuario.email,
-        }
-    )
+    return usuario.gera_json()

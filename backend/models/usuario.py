@@ -1,3 +1,4 @@
+from flask import jsonify
 from sqlalchemy_serializer import SerializerMixin
 from flask_login import UserMixin
 
@@ -12,3 +13,13 @@ class Usuario(db.Model, SerializerMixin, UserMixin):
     sobrenome = db.Column(db.String)
     email = db.Column(db.String, unique=True, nullable=False)
     senha = db.Column(db.String, nullable=False)
+
+    def gera_json(self):
+        """ Retorna o objeto Usuario como JSON.
+        """
+        return jsonify({
+            'id': self.id,
+            'nome': self.nome,
+            'sobrenome': self.sobrenome,
+            'email': self.email,
+        })
