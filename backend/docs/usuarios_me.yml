@@ -1,0 +1,27 @@
+
+tags:
+  - Usuarios
+summary: Retorna as informações do usuário logado
+description: Retorna as informações do usuário que está logado na aplicação.
+responses:
+  '200':
+    description: Informações do usuário
+    schema:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID do usuário
+        nome:
+          type: string
+          description: Nome do usuário
+        sobrenome:
+          type: string
+          description: Sobrenome do usuário
+        email:
+          type: string
+          description: Email do usuário
+  '404':
+    description: Usuário não encontrado
+  '401':
+    description: Usuário não autenticado

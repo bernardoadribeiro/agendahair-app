@@ -2,6 +2,8 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from sqlalchemy.sql import func
 
+from flasgger import swag_from
+
 from operator import concat
 import random
 
@@ -13,6 +15,7 @@ agendamento_bp = Blueprint('agendamento', __name__)
 
 @agendamento_bp.route('/agendamentos', methods=['GET'])
 @login_required
+@swag_from('../docs/agendamentos_get.yml')
 def get_agendamentos():
     """ Retorna todos os agendamentos realizados com filtros
         body: espera receber um form-data
@@ -40,6 +43,7 @@ def get_agendamentos():
 
 @agendamento_bp.route('/agendamentos', methods=['POST'])
 @login_required
+@swag_from('../docs/agendamentos_post.yml')
 def post_agendamento():
     """ Insere um novo agendamento com os dados informados no form-data
         body: espera receber um form-data
@@ -93,6 +97,7 @@ def post_agendamento():
 
 @agendamento_bp.route('/agendamentos/<id>', methods=['PUT'])
 @login_required
+@swag_from('../docs/agendamentos_put.yml')
 def put_agendamento(id):
     """ Atualiza o agendamento do ID informado na URL com os dados informados no form-data
         body: espera receber um form-data
@@ -150,6 +155,7 @@ def put_agendamento(id):
 
 @agendamento_bp.route('/agendamentos/<id>', methods=['DELETE'])
 @login_required
+@swag_from('../docs/agendamentos_delete.yml')
 def delete_agendamento(id):
     """ Deleta o agendamento do ID informado na URL
         body: <vazio>

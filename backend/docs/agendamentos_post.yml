@@ -1,0 +1,47 @@
+tags:
+  - Agendamentos
+summary: Criar um novo agendamento
+description: Cria um novo agendamento. Requer autenticação.
+produces:
+  - application/json
+parameters:
+  - name: nome_cliente
+    in: formData
+    description: Nome do cliente que está fazendo o agendamento.
+    required: true
+    type: string
+  - name: data_agendamento
+    in: formData
+    description: Data do agendamento.
+    required: true
+    type: string
+  - name: horario_inicio
+    in: formData
+    description: Horário de início do agendamento.
+    required: true
+    type: string
+  - name: horario_fim
+    in: formData
+    description: Horário de término do agendamento.
+    required: true
+    type: string
+  - name: servicos_desejados
+    in: formData
+    description: Serviços desejados pelo cliente.
+    type: string
+  - name: observacoes
+    in: formData
+    description: Observações adicionais do cliente.
+    type: string
+responses:
+  200:
+    description: OK
+    schema:
+      type: object
+      properties:
+        sucesso:
+          type: boolean
+        mensagem:
+          type: string
+        novo_agendamento:
+          $ref: '#/definitions/Agendamento'

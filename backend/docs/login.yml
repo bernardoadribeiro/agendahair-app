@@ -1,0 +1,52 @@
+tags:
+  - Autenticação
+summary: API de Login
+description: Endpoint para autenticar um usuário no sistema.
+parameters:
+  - name: email
+    in: formData
+    description: Email do usuário.
+    required: true
+    type: string
+  - name: senha
+    in: formData
+    description: Senha do usuário.
+    required: true
+    type: string
+responses:
+  200:
+    description: Usuário autenticado com sucesso.
+    schema:
+      properties:
+        sucesso:
+          type: boolean
+          example: true
+          description: Indica se a autenticação foi bem sucedida.
+        mensagem:
+          type: string
+          example: "Usuário autenticado!"
+          description: Mensagem de sucesso ou erro.
+  400:
+    description: Dados inválidos.
+    schema:
+      properties:
+        sucesso:
+          type: boolean
+          example: false
+          description: Indica se a autenticação foi bem sucedida.
+        mensagem:
+          type: string
+          example: "Email e senha precisam ser informados."
+          description: Mensagem de erro.
+  404:
+    description: Usuário não encontrado.
+    schema:
+      properties:
+        sucesso:
+          type: boolean
+          example: false
+          description: Indica se a autenticação foi bem sucedida.
+        mensagem:
+          type: string
+          example: "Usuario nao encontrado."
+          description: Mensagem de erro.
