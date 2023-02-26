@@ -128,6 +128,26 @@ def put_agendamento(id):
     })
 
 
+@agendamento_bp.route('/agendamentos/<id>', methods=['DELETE'])
+@login_required
+def delete_agendamento(id):
+    """ Deleta o agendamento do ID informado na URL
+        body: <vazio>
+    """
+
+    agendamento = Agendamento.query.filter_by(id=id).first()
+    if not agendamento:
+        return jsonify({'sucesso': False, 'mensagem':'Agendamento nao encontrado.'}), 400
+    
+    db.session.delete(agendamento)
+    db.session.commit()
+
+    return jsonify({
+        'sucesso': True, 
+        'mensagem': 'Agendamento deletado com sucesso.',
+    })
+    
+
 def gera_codigo():
     """ Gerador automatico de codigo unico para cada agendamento.
         Retorno: Codigo no formato `ABCD12`
