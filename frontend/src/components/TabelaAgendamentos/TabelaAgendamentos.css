@@ -1,0 +1,13 @@
+#TabelaAgendamentos {
+    display: center;
+    margin: 1.2em;
+    margin-top: 1.5em;
+}
+
+thead {
+    background-color: #308acf
+}
+
+table {
+    background-color: #00588f
+}
