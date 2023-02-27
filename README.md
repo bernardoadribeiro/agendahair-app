@@ -59,7 +59,7 @@ The app is containerized with Docker, and the features are developed using React
 
 **How to access the app**
 - Front-end URL: http://localhost:3000
-- Back-end URL: http://localhost:5000
+- Back-end URL: http://127.0.0.1:5000/api/v1
 - APIs docs (Swagger): http://127.0.0.1:5000/apidocs/#/
 
 **Useful commands**
