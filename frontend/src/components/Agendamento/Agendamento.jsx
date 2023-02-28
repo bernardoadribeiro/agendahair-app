@@ -4,8 +4,6 @@ import './Agendamento.css'
 
 function Agendamento (props) {
 
-
-    const [codigo, setCodigo] = useState(0)
     const [form_data, setForm_data] = useState({
         nome_cliente: '',
         data_agendamento: '',
@@ -18,7 +16,7 @@ function Agendamento (props) {
     function handleBusca(e) {
         if(e.key === 'Enter')
             props.handleTabela(e.target.value)
-            setCodigo(e.target.value)
+            // 
     }
 
     function handleInputChange(e) {
@@ -33,28 +31,29 @@ function Agendamento (props) {
         e.preventDefault()
 
         try {
-            const res = await axios.post('http://localhost:5008/agendamentos', {"body":form_data},{
-                headers: {'Content-Type': 'application/json'}
+            await axios.post('http://localhost:5000/api/v1/agendamentos', {body:form_data},{
+                headers: {'Content-Type': 'multipart/form-data'}
             }).then(res => console.log(res))
         } catch(e) {console.log(e)}
-
     }
 
 
     return (
         <div id="Agendamento">
-            <h1>Agendamento</h1>
 
-            <h4>Código</h4>
-                <input type="text" placeholder="Digite o código" onKeyDown={e=>handleBusca(e)} name="codigo"/>
-                <form onSubmit={handleSubmit}>
+            <h4>Fazer consulta</h4>
+            <input type="text" placeholder="Digite o código do agendamento" onKeyDown={e=>handleBusca(e)} name="codigo"/>
+            
+            <h1>Agendamento</h1>
+            <form onSubmit={handleSubmit}>
                 <input type="text" placeholder="Nome completo" name="nome_cliente" value={form_data.nome} onChange={handleInputChange} />
                 <input type="date" placeholder="Data" name="data_agendamento" value={form_data.data} onChange={handleInputChange} />
                 <input type='text' placeholder="Status" name="status" value={form_data.status} onChange={handleInputChange} />
-                <input type="time" placeholder="Horário início" name="horario_inicio" value={form_data.horarioInicio} onChange={handleInputChange} />
-                <input type='time' placeholder="Horário fim" name="horario_fim" value={form_data.horarioFim} onChange={handleInputChange} />
+                <input type="time" placeholder="Horário início" name="horario_inicio" value={form_data.horario_inicio} onChange={handleInputChange} />
+                <input type='time' placeholder="Horário fim" name="horario_fim" value={form_data.horario_fim} onChange={handleInputChange} />
                 <input type="text" placeholder="Serviços desejados" name="servicos_desejados" value={form_data.servicos} onChange={handleInputChange} />
                 <input type="text" placeholder="Observações" name="observacoes" value={form_data.observacoes} onChange={handleInputChange} />
+                
                 <button type="submit">Agendar</button>
             </form>
         </div>

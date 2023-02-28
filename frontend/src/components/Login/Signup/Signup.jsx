@@ -7,25 +7,21 @@ const Signup = (props) => {
 
         e.preventDefault()
 
-        let data = {
-            nome: e.target.nome.value,
-            sobrenome: e.target.sobrenome.value,
-            email: e.target.email.value,
-            password: e.target.password.value,
-        }
+        const data = new FormData(e.target.form)
 
         try {
-            const res = await axios.post('http://localhost:5000/cadastrar_usuario/', JSON.stringify(data), { headers: { 'Content-Type': 'application/json' } })
-            console.log(res)
-            if (res.data.signed === true)
-                //data.token = setToken(res)
+            fetch('http://localhost:5000/api/v1/cadastrar_usuario/', {
+                method: 'POST',
+                body: data,
+                headers: {'Content-Type': 'application/json'}
+            })
+            .then((res)=> {
                 console.log(res)
-            else{
-                console.log('não')
-            }
+                if(res.status === 200)
+                    props.setDisplay(true)
+            })
         } catch (e) {
-            console.log(e)
-            props.setSession(true)
+            document.getElementById('errorCatcher').innerText = "Erro no cadastro, tente novamente!"
         }
     }
 
@@ -69,6 +65,7 @@ const Signup = (props) => {
                         <button type="submit">Criar</button>
                     </form>
                     <p onClick={() => props.setSession(false)}>Fazer Login</p>
+                    <p id="errorCatcher"></p>
                 </div>
             </div>
         </>

@@ -1,5 +1,4 @@
 import axios from "axios"
-import { useState } from "react"
 import './Signin.css'
 // Componente para Entrar no Sistema
 
@@ -9,21 +8,20 @@ const Signin = (props) => {
 
         e.preventDefault()
 
-        let data = {
-            email: e.target.email.value,
-            password: e.target.password.value,
-        }
-
+        const data = new FormData(e.target.form)
+        
         try {
-            const res = await axios.post('http://localhost:5000/login', JSON.stringify(data), { headers: { 'Content-Type': 'application/json' } })
-            if (res.data.id)
-                console.log(res)
-            else{
-                console.log('não')
-            }
+            fetch('http://localhost:5000/api/v1/login/', {
+                method: 'POST',
+                body: data,
+                headers: {'Content-Type': 'multipart/form-data'}
+            } ).then(res=> res.json()).then((res) => {
+                if(res.status === 200)
+                    props.setDisplay(true)
+            })
         } catch (e) {
             console.log(e)
-            props.setDisplay(true)
+            document.getElementById('errorCatcher').innerHTML = "Ocorreu um erro, tente novamente!"
         }
     }
 
@@ -49,8 +47,9 @@ const Signin = (props) => {
                             required
                         />
                         <button type="submit">Entrar</button>
-                        <p onClick={() => props.setSession(true)}>criar conta</p>
                     </form>
+                        <p onClick={() => props.setSession(true)}>criar conta</p>
+                        <h5 id="errorCatcher"></h5>
                 </div>
             </div>
         </>

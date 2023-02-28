@@ -3,7 +3,7 @@
     margin: 5px;
     border-radius: 3px;
     height: auto;
-    width: 20em;
+    width: 30em;
     max-width: 500px;
     overflow-y: auto;
     background-color: rgba(0, 0, 0, 0.291);
@@ -34,4 +34,5 @@
     box-sizing: border-box;
     display: block;
     margin-bottom: 10px;
+    border-radius: 5px
   }
