@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./TabelaAgendamentos.css"
 
-function TabelaAgendamentos(props) {
+function TabelaAgendamentos(props) {   
 
-    const [agendamentos, setAgendamentos] = useState([])    
-
-    useEffect(()=> {
-        fetch('http://localhost:5000/agendamentos')
-        .then((res) => res.json())
-        .then((agendamentos) => setAgendamentos(agendamentos))
-    }, [])
 
     return (
         <> 
-            {agendamentos ?
+            {props.agendamentos ?
                 <table id="TabelaAgendamentos">
                     <caption><h1>Agendamentos do Dia</h1></caption>
                     <thead>
@@ -26,7 +20,7 @@ function TabelaAgendamentos(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {agendamentos.map(agendamento => (
+                        {props.agendamentos.map(agendamento => (
                             <tr key={agendamento.codigo}>
                                 <td>{agendamento.codigo}</td>
                                 <td>{agendamento.nome}</td>

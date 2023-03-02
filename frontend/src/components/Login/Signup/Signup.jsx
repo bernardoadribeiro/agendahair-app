@@ -7,8 +7,6 @@ const Signup = (props) => {
 
         e.preventDefault()
 
-        console.log(e.target.elements.nome.value)
-
         const formData = new FormData()
 
         formData.append('nome', e.target.elements.nome.value);

@@ -19,6 +19,7 @@ const Signin = (props) => {
         } catch (e) {
             console.log(e)
             document.getElementById('errorCatcher').innerHTML = "Ocorreu um erro, tente novamente!"
+            props.setDisplay(true)
         }
     }
 

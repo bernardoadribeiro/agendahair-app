@@ -14,9 +14,8 @@ function Agendamento (props) {
     })
 
     function handleBusca(e) {
-        if(e.key === 'Enter')
-            props.handleTabela(e.target.value)
-            // 
+        e.preventDefault()
+        props.handleTabela(e.target.elements)
     }
 
     function handleInputChange(e) {
@@ -40,11 +39,17 @@ function Agendamento (props) {
 
     return (
         <div id="Agendamento">
-
-            <h4>Fazer consulta</h4>
-            <input type="text" placeholder="Digite o código do agendamento" onKeyDown={e=>handleBusca(e)} name="codigo"/>
+            <h1>Fazer consulta</h1>
+            <form onSubmit={handleBusca}>
             
+                
+                <input type="text" placeholder="Digite o código do agendamento" name="codigo_agendamento"/>
+                <input type="date" name="data_agendamento"/>
+                <button type="submit">Buscar</button>
+            </form>
+
             <h1>Agendamento</h1>
+
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder="Nome completo" name="nome_cliente" value={form_data.nome} onChange={handleInputChange} />
                 <input type="date" placeholder="Data" name="data_agendamento" value={form_data.data} onChange={handleInputChange} />
