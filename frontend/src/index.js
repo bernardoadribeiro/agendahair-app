@@ -1,10 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App/App'
+import Header from './components/template/Header/Header'
+import Footer from './components/template/Footer/Footer'
 
-const root = ReactDOM.createRoot(document.getElementById('authSection'));
-root.render(
+
+const header = ReactDOM.createRoot(document.getElementById('nav'))
+header.render(
   <React.StrictMode>
-    <App />
+    <Header/>
   </React.StrictMode>
-);
+)
+
+const AuthSection = ReactDOM.createRoot(document.getElementById('App'));
+AuthSection.render(
+  <React.StrictMode>
+    <App/>
+  </React.StrictMode>
+)
+
+const footer = ReactDOM.createRoot(document.getElementById('footer'))
+footer.render(
+  <React.StrictMode>
+    <Footer/>
+  </React.StrictMode>
+)

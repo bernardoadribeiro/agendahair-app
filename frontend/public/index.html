@@ -4,123 +4,23 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.classless.min.css">
-    <link rel="canonical" href="https://picocss.com/examples/company/">
     <link rel="stylesheet" href="styles/styles.css">
-    <title>Agenda Hair</title>
+    <title>React App</title>
   </head>
-  <body>
-    <!-- A Home não utilizará React -->
+  <body style="width: 98%; margin: 5px;">
+
+    <nav class="container-fluid" id="nav"></nav>
   
-    <nav class="container-fluid">
+
+    <section id="preview" style="background-color: darkgray; height: 100%; display: flex; padding: 5px; border-radius: 5px;">
+
+        <div id="App"></div>
       
-      <ul>
-        <li><a href="./" class="contrast" onclick="event.preventDefault()"><strong>AgendaHair</strong></a></li>
-      </ul>
-      <ul>
-        <li>
-            <a href="./home.html"><summary aria-haspopup="listbox" role="link" class="contrast">Home</summary></a>
-        </li>
-        <li>
-          <details role="list" dir="rtl">
-            <summary aria-haspopup="listbox" role="link" class="contrast">Entrar</summary>
-            <ul role="listbox">
-
-              <li> 
-                <!-- Componente React para fazer login -->
-                <div id="authSection"></div> 
-              </li>  
-
-            </ul>
-          </details>
-        </li>
-      </ul>
-    </nav>
-
-    <section class="hero" data-theme="dark">
-
-      <header class="container">
-        <hgroup style="position: relative; top: 50%; padding-left: 15px;">
-          <h1>Realize seu agendamento <br/> sem sair de casa.</h1>
-          <p style="margin-top: 15px;"><a href="/agendar" role="button" style="border-radius: 10px; width: 150px">Agendar</a></p>
-        </hgroup>
-      </header>
     </section>
 
-  <hr />
+    <hr>
 
-    <section id="preview" style="height: 100%; background-color: #394046; border-radius: 5px;">
-      <div class="sobre">
-
-        <h2>Quem somos:</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-          Consequuntur voluptates sequi hic rem. Nostrum quia maiores, sed, 
-          consequuntur architecto saepe aperiam rem inventore unde esse nemo natus odio
-          consequatur commodi.</p>
-
-        <p>omnis consequuntur vitae magni magnam perferendis! 
-          Quas corporis quisquam vero facere aut sunt. Iure!</p>
-      
-      </div>
-
-      <div class="sobre">
-        <h2>Horário de Atendimento:</h2>
-        <p><strong>Segunda a Sexta:</strong> 08:00 às 18:00</p>
-        <p><strong>Sábado:</strong> 08:00 às 15:00</p>
-        <p><strong>Domingo:</strong> Fechado</p>
-        <p><strong>Feriados:</strong> 08:00 às 12:00</p>
-      </div>
-
-      <div class="sobre">
-        <h2>Serviços oferecidos:</h2>
-        <ul>
-          <li>Cortes de cabelo</li>
-          <li>Cortes de barba</li>
-          <li>Pintura de cabelo</li>
-          <li>Progressiva</li>
-          <li>Venda de Produtos</li>
-          <li>Dentre outros</li>
-        </ul>
-      </div>
-
-      <div class="sobre">
-        <h2>Entre em Contato:</h2>
-        <p><a href="#">(38) 9 9999-1212</a></p>
-        <p><a href="#">@agendahair</a></p>
-      </div>
-      </section>
-      
-      <hr>
-      
-      <footer>
-
-       <span style="width: 100vh; padding: 1em;"><h2>AgendaHair</h2></span>
-
-          <div>
-            <h3>Acompanhar agendamento</h3>
-            <input style="width: auto;" type="text" placeholder="Código do agendamento">
-            <button type="submit" style="width: auto; border-radius: 10px;">Verificar</button>
-          </div>
-
-          <div>
-            <h3>Páginas</h3>
-            <p><a href="/#">Home</a></p>
-            <p><a href="/agendar">Agendar</a></p>
-            <p><a href="/sobre">Sobre</a></p>
-          </div>
-
-          <div>
-            <h3>Repositório do projeto</h3>
-            <p>agenda-hair-react-app</p>
-          </div>
-
-          <span style="text-align: center;">
-            <h6>Todos os direitos reservados &copy; 2023</h6>
-            Desenvolvido por alunos para a disciplina de Desenvolvimento Web do curso BSI (IFNMG Campus Januária)
-            <p>Semestre 02/2022</p>
-
-          </span>
-
-      </footer>
+    <div id="footer"></div>
 
   </body>
 </html>
