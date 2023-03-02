@@ -51,7 +51,6 @@ def logout():
 
 
 @auth_bp.route('/cadastrar_usuario/', methods=['POST'])
-@login_required
 @swag_from('../docs/cadastrar_usuario.yml')
 def post_usuario():    
     """ Cadastra novo usuario 
