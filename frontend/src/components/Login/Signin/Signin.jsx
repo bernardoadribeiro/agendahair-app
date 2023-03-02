@@ -13,7 +13,7 @@ const Signin = (props) => {
         formData.append('senha', e.target.elements.senha.value)
         
         try {
-            const res = await axios.post('http://localhost:5000/api/v1/login/', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+            const res = await axios.post('http://localhost:5000/api/v1/login', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
             if(res.status === 200)
                 props.setDisplay(true)
         } catch (e) {
