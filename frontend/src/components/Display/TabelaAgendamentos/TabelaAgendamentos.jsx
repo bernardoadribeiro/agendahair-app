@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import "./TabelaAgendamentos.css"
 
 function TabelaAgendamentos(props) {   
-
-
+    
     return (
         <> 
             {props.agendamentos ?
