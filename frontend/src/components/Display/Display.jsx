@@ -12,7 +12,6 @@ export default function Display(props) {
 
         const formData = new FormData()
         formData.append('codigo_agendamento', e.codigo_agendamento.value)
-        formData.append('data_agendamento', e.data_agendamento.value)
 
         const res = await axios.get('http://localhost:5000/api/v1/agendamentos', formData)
         console.log(res)
@@ -20,6 +19,7 @@ export default function Display(props) {
             setAgendamentos([...res.data])
         else
             console.log('Ocorreu um erro')
+        console.log(agendamentos)
     }
 
     return (

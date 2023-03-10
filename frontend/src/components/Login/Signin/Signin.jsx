@@ -9,7 +9,7 @@ const Signin = (props) => {
         e.preventDefault()
 
         const formData = new FormData()
-        formData.append('nome', e.target.elements.email.value)
+        formData.append('email', e.target.elements.email.value)
         formData.append('senha', e.target.elements.senha.value)
         
         try {
@@ -18,8 +18,7 @@ const Signin = (props) => {
                 props.setDisplay(true)
         } catch (e) {
             console.log(e)
-            document.getElementById('errorCatcher').innerHTML = "Ocorreu um erro, tente novamente!"
-            props.setDisplay(true)
+            document.getElementById('errorCatcher').innerHTML = `${e.response.data.mensagem}`
         }
     }
 
@@ -47,7 +46,7 @@ const Signin = (props) => {
                         <button type="submit">Entrar</button>
                     </form>
                         <p onClick={() => props.setSession(true)}>criar conta</p>
-                        <h5 id="errorCatcher"></h5>
+                        <p id="errorCatcher"></p>
                 </div>
             </div>
         </>
