@@ -109,7 +109,7 @@ def post_usuario():
         }), 400
 
 @auth_bp.route('/usuarios/me', methods=['GET'])
-@login_required
+#@login_required
 @swag_from('../docs/usuarios_me.yml')
 def usuarios_me():
     """ Retorna as informacoes do usuarios que esta logado.
