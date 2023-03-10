@@ -1,0 +1,37 @@
+#TabelaAgendamentos {
+    display: table;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  #TabelaAgendamentos > div {
+    display: table-row;
+    border: 1px solid #ccc;
+    color: #fff;
+    background-color: #92b7d3;
+  }
+  
+  #TabelaAgendamentos > div:last-child {
+    border-bottom: none;
+  }
+  
+  #TabelaAgendamentos > div > span {
+    display: table-cell;
+    padding: 10px;
+    border-right: 1px solid #ccc;
+  }
+  
+  #TabelaAgendamentos > div > span:last-child {
+    border-right: none;
+  }
+  
+  #TabelaAgendamentos > div > span:first-child {
+    font-weight: bold;
+    border-right: none;
+  }
+
+  #TabelaAgendamentos > h1 {
+    
+  }
