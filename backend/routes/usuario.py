@@ -7,7 +7,7 @@ from models.usuario import Usuario
 usuario_bp = Blueprint('usuario', __name__)
 
 @usuario_bp.route('/usuarios', methods=['GET'])
-@login_required
+#@login_required
 def get_usuarios():
     """ Retorna todos os usuarios cadastrados
     """
@@ -29,7 +29,7 @@ def get_usuarios():
     )
 
 @usuario_bp.route('/usuarios/<id>', methods=['GET'])
-@login_required
+#@login_required
 def get_usuario(id):    
     """ Retorna o usuario que possui o ID informado na URL
     """
