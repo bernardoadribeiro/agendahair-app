@@ -1,0 +1,21 @@
+#tabela-agendamentos {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: Arial, sans-serif;
+
+}
+
+#tabela-agendamentos th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.tabela-container {
+  display: table;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 3px;
+  max-width: 1600px;
+  overflow-x: auto;
+  width: 70% !important;
+}

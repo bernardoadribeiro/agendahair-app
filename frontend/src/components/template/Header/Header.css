@@ -1,0 +1,27 @@
+#header {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7); 
+    border-radius: 5px;
+    margin-bottom: 20px
+  }
+  
+  .header-left {
+    float: left
+  }
+  
+  .header-right {
+    display: flex;
+    float: right;
+    align-items: center;
+  }
+  
+  .header-right span {
+    margin-left: 10px;
+  }
+.contrast {
+    margin: 5px
+}
+  

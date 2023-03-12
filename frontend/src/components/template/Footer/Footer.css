@@ -1,0 +1,18 @@
+footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7); 
+    border-radius: 5px;
+    margin-top: 10px
+}
+
+#pages, span {
+    margin: 5px;
+}
+
+#allRightsReserved {
+    text-align: center;
+    flex-basis: 100%
+}

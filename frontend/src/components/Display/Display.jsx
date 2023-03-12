@@ -1,24 +1,30 @@
-import React, { useState } from "react"
+import React from "react"
 import "./Display.css"
-import Agendamento from "../Agendamento/Agendamento"
-import TabelaAgendamentos from "../TabelaAgendamentos/TabelaAgendamentos"
+import axios from "axios"
+import Agendamento from "./Agendamento/Agendamento"
+import TabelaAgendamentos from "./TabelaAgendamentos/TabelaAgendamentos"
 
 export default function Display(props) {
 
-    const [agendamentos, setAgendamentos] = useState([])
 
-    function handleTabela(ID) {
-        console.log(ID)
+    async function handleTabela(e) {
 
-        fetch('http:/localhost:5008/agendandar', {
-            method: 'GET'
-        }).then(agendamentos => setAgendamentos([...agendamentos]))
+        const formData = new FormData()
+        formData.append('codigo_agendamento', e.codigo_agendamento.value)
+
+        try{
+            const res = await axios.get(`http://localhost:5000/api/v1/agendamentos/${e.codigo_agendamento.value}`, formData)
+            if(res.status === 200)
+                props.setAgendamentos([...res.data])
+        } catch(e){
+            alert(e.response.data.mensagem)
+        }
     }
 
     return (
         <div id="main">
             <Agendamento handleTabela={handleTabela}/>
-            <TabelaAgendamentos agendamentos={agendamentos}/>
+            <TabelaAgendamentos agendamentos={props.agendamentos}/>
         </div>
     )
 }
