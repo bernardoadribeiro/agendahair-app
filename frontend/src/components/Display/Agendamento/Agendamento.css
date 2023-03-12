@@ -3,8 +3,8 @@
     margin: 5px;
     border-radius: 3px;
     height: auto;
-    width: 30em;
-    max-width: 500px;
+    max-width: 600px;
+    min-width: 400px;
     overflow-y: auto;
     background-color: rgba(0, 0, 0, 0.291);
   }
