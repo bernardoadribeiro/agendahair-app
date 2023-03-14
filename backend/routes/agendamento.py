@@ -14,7 +14,7 @@ from models.agendamento import Agendamento
 
 agendamento_bp = Blueprint('agendamento', __name__)
 
-@agendamento_bp.route('/agendamentos',)
+@agendamento_bp.route('/agendamentos', methods=['GET'])
 @swag_from('../docs/agendamentos_get.yml')
 def get_agendamentos():
     """ Retorna todos os agendamentos realizados com filtros
