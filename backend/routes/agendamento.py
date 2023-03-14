@@ -28,7 +28,6 @@ def get_agendamentos():
     codigo_agendamento = request.args.get('codigo_agendamento')
 
     if codigo_agendamento and data_agendamento:
-        print('passou aqui 1')
         agendamentos = Agendamento.query.filter_by(code=codigo_agendamento, data_agendamento=data_agendamento)
 
     elif data_agendamento:
@@ -38,7 +37,6 @@ def get_agendamentos():
         agendamentos = Agendamento.query.filter_by(code=codigo_agendamento)
 
     else:
-        print('passou aqui 2')
         agendamentos = Agendamento.query.all()
     
     return jsonify(
