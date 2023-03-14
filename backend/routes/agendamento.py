@@ -14,7 +14,7 @@ from models.agendamento import Agendamento
 agendamento_bp = Blueprint('agendamento', __name__)
 
 @agendamento_bp.route('/agendamentos', methods=['GET'])
-@login_required
+#@login_required
 @swag_from('../docs/agendamentos_get.yml')
 def get_agendamentos():
     """ Retorna todos os agendamentos realizados com filtros
@@ -63,7 +63,7 @@ def get_agendamentos_code(codigo):
 
 
 @agendamento_bp.route('/agendamentos', methods=['POST'])
-@login_required
+#@login_required
 @swag_from('../docs/agendamentos_post.yml')
 def post_agendamento():
     """ Insere um novo agendamento com os dados informados no form-data
@@ -117,7 +117,7 @@ def post_agendamento():
 
 
 @agendamento_bp.route('/agendamentos/<id>', methods=['PUT'])
-@login_required
+#@login_required
 @swag_from('../docs/agendamentos_put.yml')
 def put_agendamento(id):
     """ Atualiza o agendamento do ID informado na URL com os dados informados no form-data
@@ -175,7 +175,7 @@ def put_agendamento(id):
 
 
 @agendamento_bp.route('/agendamentos/<id>', methods=['DELETE'])
-@login_required
+#@login_required
 @swag_from('../docs/agendamentos_delete.yml')
 def delete_agendamento(id):
     """ Deleta o agendamento do ID informado na URL
