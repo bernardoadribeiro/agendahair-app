@@ -7,8 +7,6 @@ const Signup = (props) => {
 
         e.preventDefault()
 
-        console.log(e.target.elements.nome.value)
-
         const formData = new FormData()
 
         formData.append('nome', e.target.elements.nome.value);
@@ -18,11 +16,11 @@ const Signup = (props) => {
 
         try {
             const res = await axios.post('http://localhost:5000/api/v1/cadastrar_usuario/', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
-            console.log(res)
+            console.log(typeof res)
             if(res.status === 200)
                 props.setDisplay(true)
         } catch (e) {
-            document.getElementById('errorCatcher').innerText = "Erro no cadastro, tente novamente!"
+            document.getElementById('errorCatcher').innerText = `${e.response.data.mensagem}`
         }
     }
 

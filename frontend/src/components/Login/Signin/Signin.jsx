@@ -9,16 +9,16 @@ const Signin = (props) => {
         e.preventDefault()
 
         const formData = new FormData()
-        formData.append('nome', e.target.elements.email.value)
+        formData.append('email', e.target.elements.email.value)
         formData.append('senha', e.target.elements.senha.value)
         
         try {
-            const res = await axios.post('http://localhost:5000/api/v1/login/', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+            const res = await axios.post('http://localhost:5000/api/v1/login', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
             if(res.status === 200)
                 props.setDisplay(true)
         } catch (e) {
             console.log(e)
-            document.getElementById('errorCatcher').innerHTML = "Ocorreu um erro, tente novamente!"
+            document.getElementById('errorCatcher').innerHTML = `${e.response.data.mensagem}`
         }
     }
 
@@ -46,7 +46,7 @@ const Signin = (props) => {
                         <button type="submit">Entrar</button>
                     </form>
                         <p onClick={() => props.setSession(true)}>criar conta</p>
-                        <h5 id="errorCatcher"></h5>
+                        <p id="errorCatcher"></p>
                 </div>
             </div>
         </>

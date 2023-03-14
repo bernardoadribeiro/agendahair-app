@@ -1,0 +1,19 @@
+footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+form {
+    display: inline;
+    text-align: center;
+    width: 20em;
+    inset: 1.5em, auto, 1.5em, auto;
+}
+
+
+#allRightsReserved {
+    text-align: center;
+    flex-basis: 100%
+}
