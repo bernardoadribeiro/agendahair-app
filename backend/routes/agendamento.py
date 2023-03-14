@@ -1,3 +1,4 @@
+from logging import log
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from sqlalchemy.sql import func
@@ -14,7 +15,6 @@ from models.agendamento import Agendamento
 agendamento_bp = Blueprint('agendamento', __name__)
 
 @agendamento_bp.route('/agendamentos', methods=['GET'])
-#@login_required
 @swag_from('../docs/agendamentos_get.yml')
 def get_agendamentos():
     """ Retorna todos os agendamentos realizados com filtros
@@ -23,11 +23,14 @@ def get_agendamentos():
             - data_agendamento: Date -> Data do agendamento no formato `yyyy-mm-dd`
             - codigo_agendamento: string -> Codigo do agendamento
     """
+    
+    data_agendamento = request.args.get('data_agendamento')
+    codigo_agendamento = request.args.get('codigo_agendamento')
 
-    data_agendamento = request.form.get('data_agendamento')
-    codigo_agendamento = request.form.get('codigo_agendamento')
+    if codigo_agendamento and data_agendamento:
+        agendamentos = Agendamento.query.filter_by(code=codigo_agendamento, data_agendamento=data_agendamento)
 
-    if data_agendamento:
+    elif data_agendamento:
         agendamentos = Agendamento.query.filter_by(data_agendamento=data_agendamento)
 
     elif codigo_agendamento:
