@@ -34,11 +34,16 @@ function Agendamento (props) {
             <h1>Fazer consulta</h1>
             
             <form onSubmit={handleBusca}>
-                <input type="text" placeholder="Digite o código/data do agendamento" name="codigo_agendamento"/>
+                <label htmlFor="codigo_agendamento">Código do Agendamento</label>
+                <input type="text" placeholder="Digite o código do agendamento" name="codigo_agendamento"/>
+
+                <label htmlFor="data_agendamento">Data do Agendamento</label>
+                <input type="date" placeholder="Data do agendamento" name="data_agendamento" />
+
                 <button type="submit">Buscar</button>
             </form>
 
-            <h1>Agendamento</h1>
+            <h1>Novo Agendamento</h1>
 
             <form onSubmit={handleSubmit} id="agendamento">
 
