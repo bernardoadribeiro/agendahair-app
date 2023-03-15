@@ -1,37 +1,42 @@
 import React from "react"
 import "./Footer.css"
+import axios from 'axios'
 
 const Footer = (props) => {
 
+    function getMe(e) {
+        e.preventDefault()
+        try{
+            axios.get('http://localhost:5000/api/v1/usuarios').then(res => console.log(res))
+        } catch(e) {
+            alert(e.response.mensagem)
+        }
+    }
+
     return (
         <footer>
-
-            <span><h2>AgendaHair</h2></span>
-                
-            <form>
-                <h3>Acompanhar agendamento</h3>
-                <input type="text" placeholder="Código do agendamento" />
-                <button type="submit">Verificar</button>
-            </form>
-    
             <div>
+                <h2>AgendaHair</h2>
+            </div>
+    
+            <div id="pages">
                 <h3>Páginas</h3>
-                <p><a href="/#">Home</a></p>
-                <p><a href="/agendar">Agendar</a></p>
-                <p><a href="./home.html">Sobre</a></p>
+                <span><a href="./home.html">Home</a></span>
+                <span onClick={(e) => getMe(e)}>Sobre</span>
             </div>
     
             <div>
                 <h3>Repositório do projeto</h3>
-                <p>agenda-hair-react-app</p>
+                <a href="https://github.com/bernardoadribeiro/agendahair-app">agenda-hair-react-app</a>
             </div>
     
-    
-            <span id="allRightsReserved">
+            <div id="allRightsReserved">
                 <h6>Todos os direitos reservados &copy; 2023</h6>
-                Desenvolvido por alunos para a disciplina de Desenvolvimento Web do curso BSI (IFNMG Campus Januária)
-                <p>Semestre 02/2022</p>
-            </span>
+                <span>
+                    Desenvolvido por alunos para a disciplina de Desenvolvimento Web do curso BSI (IFNMG Campus Januária)
+                </span>
+                <span>Semestre 02/2022</span>
+            </div>
        </footer>
     )
 }

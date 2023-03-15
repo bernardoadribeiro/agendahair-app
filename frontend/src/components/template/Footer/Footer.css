@@ -3,15 +3,14 @@ footer {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0.7); 
+    border-radius: 5px;
+    margin-top: 10px
 }
 
-form {
-    display: inline;
-    text-align: center;
-    width: 20em;
-    inset: 1.5em, auto, 1.5em, auto;
+#pages, span {
+    margin: 5px;
 }
-
 
 #allRightsReserved {
     text-align: center;
