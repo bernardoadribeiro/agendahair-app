@@ -1,6 +1,6 @@
 import React from "react"
 import "./Display.css"
-import axios, { formToJSON } from "axios"
+import axios from "axios"
 import Agendamento from "./Agendamento/Agendamento"
 import TabelaAgendamentos from "./TabelaAgendamentos/TabelaAgendamentos"
 

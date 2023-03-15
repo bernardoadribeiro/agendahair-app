@@ -45,7 +45,7 @@ function TabelaAgendamentos(props) {
             {props.agendamentos ? (
                 <table className="tabela-agendamentos">
                     <caption>
-                        <h1>Agendamentos do Dia</h1>
+                        <h1>Agendamentos</h1>
                     </caption>
                     <thead>
                         <tr>

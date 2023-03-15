@@ -27,7 +27,7 @@ const Footer = (props) => {
     
             <div>
                 <h3>Repositório do projeto</h3>
-                <span>agenda-hair-react-app</span>
+                <a href="https://github.com/bernardoadribeiro/agendahair-app">agenda-hair-react-app</a>
             </div>
     
             <div id="allRightsReserved">

@@ -28,7 +28,7 @@ const Header = (props) => {
   return (
     <div id="header">
       <div className="header-left">
-        <a href="./" className="contrast">
+        <a href="./home.html" className="contrast">
           <strong>AgendaHair</strong>
         </a>
       </div>
